@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Espectro Electromagnético</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=DM+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="espectro_em.css">
+</head>
+<body>
+
+  <!-- NAV FUERA DEL #app para que no herede su padding ni max-width -->
+  <nav class="nav-top">
+    <a href="Index.html" class="nav-home">← Inicio</a>
+    <a href="simulador_reflexion_em.html">Reflexión</a>
+    <a href="simulador_refraccion_em.html">Refracción</a>
+    <a href="espectro_em_v2.html" class="nav-active">Espectro</a>
+  </nav>
+
+<div id="app">
+
+  <div class="hdr">
+    <h1>Espectro Electromagnético</h1>
+    <p class="sub">Simulador físico</p>
+  </div>
+
+  <div class="spec-wrap" id="specWrap">
+    <canvas id="specCvs"></canvas>
+    <div class="needle" id="needle">
+      <div class="ndot"></div>
+      <div class="nline"></div>
+    </div>
+  </div>
+
+  <div class="btabs" id="btabs"></div>
+
+  <div class="sl-card">
+    <div class="sl-top">
+      <span class="sl-lbl">Longitud de onda λ</span>
+      <div class="freq-big"><span id="fVal">—</span><span class="u" id="fUnit"></span></div>
+    </div>
+    <input type="range" id="sl" min="0" max="10000" value="4700" step="1">
+  </div>
+
+  <div class="fmls">
+    <div class="fml"><span class="eq">f = c / λ</span><span class="nm">frecuencia</span></div>
+    <div class="fml"><span class="eq">E = h·f</span><span class="nm">fotón (Planck)</span></div>
+    <div class="fml"><span class="eq">T = 1 / f</span><span class="nm">período</span></div>
+    <div class="fml"><span class="eq">k = 2π / λ</span><span class="nm">núm. de onda</span></div>
+  </div>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="ptitle">Onda EM transversal — plano xz (E) y xy (B)</div>
+      <canvas id="wCvs" style="height:190px"></canvas>
+      <div class="wave-hint">🔍 Clic para ampliar la gráfica</div>
+      <div class="wlegend">
+        <span><span class="ldot" id="ldotE" style="background:#1a5fcc"></span>Campo eléctrico E (ẑ)</span>
+        <span><span class="ldash"></span>Campo magnético B (ŷ) — en fase · |B|=|E|/c</span>
+      </div>
+      <div class="swatch" id="swatch">—</div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">Parámetros físicos calculados</div>
+      <div class="metrics">
+        <div class="mrow"><span class="mk">f — frecuencia</span><span><span class="mv" id="mF">—</span><span class="mu" id="mFu"></span></span></div>
+        <div class="mrow"><span class="mk">λ = c / f</span><span><span class="mv" id="mL">—</span><span class="mu" id="mLu"></span></span></div>
+        <div class="mrow"><span class="mk">T = 1 / f</span><span><span class="mv" id="mT">—</span><span class="mu" id="mTu"></span></span></div>
+        <div class="mrow"><span class="mk">E = hf (fotón)</span><span><span class="mv" id="mE">—</span><span class="mu" id="mEu"></span></span></div>
+        <div class="mrow"><span class="mk">k = 2π / λ</span><span><span class="mv" id="mK">—</span><span class="mu" id="mKu"></span></span></div>
+        <div class="mrow"><span class="mk">ω = 2πf</span><span><span class="mv" id="mW">—</span><span class="mu" id="mWu"></span></span></div>
+        <div class="mrow"><span class="mk">|B| = |E| / c</span><span><span class="mv" id="mB">—</span><span class="mu" id="mBu"></span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="physics-note" id="physNote">—</div>
+
+  <div class="ebar-panel">
+    <div class="ptitle">Energía del fotón — escala logarítmica</div>
+    <div class="ebar-track"><div class="ebar-fill" id="ebarFill"></div></div>
+    <div class="ebar-lbs"><span>Radio · µeV</span><span id="ebarVal">—</span><span>Gamma · GeV</span></div>
+  </div>
+
+  <div class="bpanel">
+    <div class="bname" id="bName">—</div>
+    <div class="brange" id="bRange">—</div>
+    <div class="bpills" id="bPills"></div>
+    <div class="bfact" id="bFact">—</div>
+  </div>
+
+</div>
+
+<div id="wModal">
+  <div id="wModalBox">
+    <button id="wModalClose" title="Cerrar">✕</button>
+    <div class="modal-title" id="mTitle">Onda Electromagnética Transversal</div>
+    <div class="modal-subtitle">Ez(x,t) = E₀·sin(kx−ωt) &nbsp;·&nbsp; By(x,t) = (E₀/c)·sin(kx−ωt) &nbsp;·&nbsp; E ⊥ B ⊥ k̂</div>
+    <canvas id="wModalCvs"></canvas>
+    <div class="modal-physics">
+      <div class="mph"><div class="mph-lbl">Frecuencia f</div><div><span class="mph-val" id="mmF">—</span><span class="mph-unit" id="mmFu"></span></div></div>
+      <div class="mph"><div class="mph-lbl">Longitud de onda λ</div><div><span class="mph-val" id="mmL">—</span><span class="mph-unit" id="mmLu"></span></div></div>
+      <div class="mph"><div class="mph-lbl">Período T</div><div><span class="mph-val" id="mmT">—</span><span class="mph-unit" id="mmTu"></span></div></div>
+      <div class="mph"><div class="mph-lbl">Energía fotón E=hf</div><div><span class="mph-val" id="mmE">—</span><span class="mph-unit" id="mmEu"></span></div></div>
+      <div class="mph"><div class="mph-lbl">Núm. de onda k=2π/λ</div><div><span class="mph-val" id="mmK">—</span><span class="mph-unit" id="mmKu"></span></div></div>
+      <div class="mph"><div class="mph-lbl">|B₀|=|E₀|/c (por 1 V/m)</div><div><span class="mph-val" id="mmB">—</span><span class="mph-unit" id="mmBu"></span></div></div>
+    </div>
+    <div class="modal-eq">
+      <div>λ = c / f<br><span class="desc">longitud de onda</span></div>
+      <div>T = 1 / f<br><span class="desc">período</span></div>
+      <div>E = h · f<br><span class="desc">energía del fotón (Planck)</span></div>
+      <div>k = 2π / λ<br><span class="desc">número de onda</span></div>
+      <div>ω = 2π · f<br><span class="desc">frecuencia angular</span></div>
+      <div>|B₀| = |E₀| / c<br><span class="desc">campo magnético (Maxwell)</span></div>
+    </div>
+  </div>
+</div>
+
+<script src="espectro_em.js"></script>
+</body>
+</html>

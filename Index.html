@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simuladores - Ondas Electromagnéticas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- HERO -->
+    <header class="hero">
+      <canvas id="heroCvs" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="hero-pill">
+          <span class="pill-dot"></span>
+          Simulación física interactiva
+        </div>
+        <h1>Ondas<br>Electromagnéticas</h1>
+        <p class="hero-lead">
+          Explora reflexión, refracción y el espectro con visualizaciones
+          interactivas — aprende jugando y viendo la física en acción.
+        </p>
+        <div class="hero-cta">
+          <a class="btn-primary" href="simulador_refraccion_em.html">
+            <span class="btn-icon">▶</span>
+            Empezar — Refracción
+          </a>
+          <a class="btn-ghost" href="simulador_reflexion_em.html">Reflexión</a>
+          <a class="btn-ghost" href="espectro_em_v2.html">Espectro</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num" id="sn0">0</div>
+        <div class="stat-label">Simuladores</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="sn1" style="opacity:0;transform:translateY(10px)">∞</div>
+        <div class="stat-label">Experimentos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="sn2" style="opacity:0;transform:translateY(10px)">λ</div>
+        <div class="stat-label">Longitud de onda</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="sn3" style="opacity:0;transform:translateY(10px)">c</div>
+        <div class="stat-label">Vel. de la luz</div>
+      </div>
+    </div>
+
+    <!-- SECTION LABEL -->
+    <p class="section-label">Módulos disponibles</p>
+
+    <!-- CARDS -->
+    <section class="menu" aria-label="Módulos disponibles">
+
+      <a class="card" href="simulador_refraccion_em.html">
+        <div class="card-header ch-purple">
+          <canvas class="card-mini-cvs" data-color1="#7F77DD" data-color2="#534AB7" aria-hidden="true"></canvas>
+          <span class="card-tag t-purple">Refracción</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Simulador: Refracción</div>
+          <div class="card-desc">Ley de Snell y ángulo crítico entre medios con distinto índice de refracción.</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-chips">
+            <span class="chip chip-purple">Snell</span>
+            <span class="chip chip-purple">TIR</span>
+          </div>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="card" href="simulador_reflexion_em.html">
+        <div class="card-header ch-teal">
+          <canvas class="card-mini-cvs" data-color1="#1D9E75" data-color2="#0F6E56" aria-hidden="true"></canvas>
+          <span class="card-tag t-teal">Reflexión</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Simulador: Reflexión</div>
+          <div class="card-desc">Coeficientes de Fresnel y ángulo de Brewster en superficies dieléctricas.</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-chips">
+            <span class="chip chip-teal">Fresnel</span>
+            <span class="chip chip-teal">Brewster</span>
+          </div>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="card" href="espectro_em.html">
+        <div class="card-header ch-coral">
+          <canvas class="card-mini-cvs" data-color1="#D85A30" data-color2="#993C1D" aria-hidden="true"></canvas>
+          <span class="card-tag t-coral">Espectro</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Espectro Electromagnético</div>
+          <div class="card-desc">Frecuencias, longitudes de onda, bandas y aplicaciones del espectro completo.</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-chips">
+            <span class="chip chip-coral">Frecuencias</span>
+            <span class="chip chip-coral">Bandas</span>
+          </div>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+    </section>
+
+    <footer class="foot">Hecho con ♥ — Proyecto educativo · Física moderna</footer>
+
+  </main>
+
+  <script src="index.js" defer></script>
+</body>
+</html>

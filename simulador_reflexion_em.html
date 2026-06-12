@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Reflexión de Ondas Electromagnéticas</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=DM+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="simulador_reflexion_em.css">
+</head>
+<body>
+<div id="app">
+  <div class="nav-top">
+    <a href="Index.html" class="nav-home">← Inicio</a>
+    <a href="simulador_refraccion_em.html">Refracción</a>
+    <a href="espectro_em_v2.html">Espectro</a>
+  </div>
+
+  <div class="hdr">
+    <h1>Reflexión de Ondas Electromagnéticas</h1>
+    <div class="sub">Coeficientes de Fresnel · Ley de reflexión · Ángulo de Brewster</div>
+  </div>
+
+  <!-- CANVAS -->
+  <div class="panel" style="padding:20px 20px 14px">
+    <div class="top-row">
+      <div class="ptitle" style="margin-bottom:0">Diagrama — onda incidente y reflejada</div>
+      <label class="anim-toggle">
+        <div class="toggle-dot on" id="animDot"></div>
+        Animación
+      </label>
+    </div>
+    <canvas id="mainCanvas"></canvas>
+    <div class="legend">
+      <div class="legend-item"><div class="lbar" style="background:#1a5fcc"></div>Onda incidente</div>
+      <div class="legend-item"><div class="lbar" style="background:#cc3030"></div>Onda reflejada</div>
+      <div class="legend-item"><div class="lbar dash"></div>Normal a la superficie</div>
+    </div>
+  </div>
+
+  <!-- CONTROLES -->
+  <div class="controls-grid">
+    <div class="ctrl-card">
+      <span class="ctrl-label">Ángulo de incidencia θ₁</span>
+      <div class="ctrl-val" id="valAngle">45<span class="u">°</span></div>
+      <input type="range" id="slAngle" min="0" max="89" value="45">
+      <div style="margin-top:12px">
+        <button class="btn-brewster" id="btnBrewster">→ Saltar al ángulo de Brewster</button>
+      </div>
+    </div>
+    <div class="ctrl-card">
+      <span class="ctrl-label">Material reflectante (n₂)</span>
+      <div class="ctrl-val" id="valN2">1.50</div>
+      <div class="mat-selector" id="matSel"></div>
+    </div>
+  </div>
+
+  <!-- MÉTRICAS -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="metric-eq">θ_r = θ_i</span>
+      <div class="metric-val" id="mThetaR">—</div>
+      <div class="metric-nm">Ángulo reflejado</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-eq">Rₛ = |rₛ|²</span>
+      <div class="metric-val" id="mRs">—</div>
+      <div class="metric-nm">Reflectancia pol. s</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-eq">Rₚ = |rₚ|²</span>
+      <div class="metric-val" id="mRp">—</div>
+      <div class="metric-nm">Reflectancia pol. p</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-eq">θ_B = arctan(n₂/n₁)</span>
+      <div class="metric-val" id="mBrew">—</div>
+      <div class="metric-nm">Ángulo de Brewster</div>
+    </div>
+  </div>
+
+  <!-- BARRAS ENERGÍA -->
+  <div class="panel" style="padding:20px 24px">
+    <div class="ptitle">Energía reflejada según polarización (n₁ = aire = 1.00)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">
+          Pol. s (TE) — E perpendicular al plano &nbsp;<span id="rsPct" style="color:var(--text);font-weight:600"></span>
+        </div>
+        <div class="intensity-track"><div class="intensity-fill" id="rsBar" style="background:#1a5fcc"></div></div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">
+          Pol. p (TM) — E en el plano &nbsp;<span id="rpPct" style="color:var(--text);font-weight:600"></span>
+        </div>
+        <div class="intensity-track"><div class="intensity-fill" id="rpBar" style="background:#cc3030"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTA FÍSICA -->
+  <div class="phys-note" id="physNote">—</div>
+
+  <!-- ECUACIONES -->
+  <div class="eqs-grid">
+    <div class="metric-card">
+      <span class="metric-eq">rₛ = (n₁cosθ₁ − n₂cosθ₂) / (n₁cosθ₁ + n₂cosθ₂)</span>
+      <div class="metric-nm" style="margin-top:6px">Fresnel — polarización s (TE)</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-eq">rₚ = (n₂cosθ₁ − n₁cosθ₂) / (n₂cosθ₁ + n₁cosθ₂)</span>
+      <div class="metric-nm" style="margin-top:6px">Fresnel — polarización p (TM)</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-eq">θ_B = arctan(n₂/n₁) → Rₚ = 0</span>
+      <div class="metric-nm" style="margin-top:6px">Brewster: la ref. p se anula</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="simulador_reflexion_em.js"></script>
+</body>
+</html>
